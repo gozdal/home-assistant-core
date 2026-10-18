@@ -4,8 +4,9 @@
 from dataclasses import dataclass, field
 
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import config_validation as cv
+from homeassistant.helpers import config_validation as cv, entity_registry as er
 from homeassistant.helpers.typing import ConfigType
 
 from .const import DOMAIN
@@ -40,6 +41,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if data.heartbeat is None:
         data.heartbeat = BroadlinkHeartbeat(hass)
         hass.async_create_task(data.heartbeat.async_setup())
+    return True
+
+
+async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Migrate an old config entry."""
+    if entry.version > 1:
+        return False
+
+    if entry.minor_version < 2:
+        # Hysen thermostats no longer provide time and select entities.
+        entity_registry = er.async_get(hass)
+        for entity_entry in er.async_entries_for_config_entry(
+            entity_registry, entry.entry_id
+        ):
+            if entity_entry.domain in (Platform.SELECT, Platform.TIME):
+                entity_registry.async_remove(entity_entry.entity_id)
+        hass.config_entries.async_update_entry(entry, minor_version=2)
+
     return True
 
 
