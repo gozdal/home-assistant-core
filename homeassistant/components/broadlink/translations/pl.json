@@ -1,0 +1,78 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Urządzenie jest już skonfigurowane",
+            "cannot_connect": "Nie można nawiązać połączenia",
+            "invalid_host": "Nieprawidłowa nazwa hosta lub adres IP",
+            "not_supported": "Urządzenie nie jest obsługiwane",
+            "unknown": "Nieoczekiwany błąd"
+        },
+        "error": {
+            "cannot_connect": "Nie można nawiązać połączenia",
+            "invalid_host": "Nieprawidłowa nazwa hosta lub adres IP",
+            "unknown": "Nieoczekiwany błąd"
+        },
+        "flow_title": "{name} ({model}, IP: {host})",
+        "step": {
+            "auth": {
+                "title": "Autoryzuj urządzeniem"
+            },
+            "finish": {
+                "data": {
+                    "name": "Nazwa"
+                },
+                "title": "Wprowadź nazwę dla urządzenia"
+            },
+            "reset": {
+                "title": "Odblokuj urządzeniem"
+            },
+            "unlock": {
+                "data": {
+                    "unlock": "Odblokuj"
+                },
+                "description": "Urządzenie {name} ({model} na {host}) jest zablokowane. Może to prowadzić do problemów z uwierzytelnianiem w Home Assistant. Chcesz je odblokować?",
+                "title": "Odblokuj urządzenie (opcjonalne)"
+            },
+            "user": {
+                "data": {
+                    "host": "Host",
+                    "timeout": "Timeout (limit czasu)"
+                }
+            }
+        }
+    },
+    "entity": {
+        "binary_sensor": {
+            "heating": {
+                "name": "Grzanie"
+            }
+        },
+        "number": {
+            "max_temp": {
+                "name": "Maksymalna nastawa"
+            },
+            "min_temp": {
+                "name": "Minimalna nastawa"
+            }
+        },
+        "sensor": {
+            "light": {
+                "name": "Natężenie oświetlenia"
+            },
+            "noise": {
+                "name": "Hałas"
+            },
+            "overload": {
+                "name": "Przeciążenie"
+            },
+            "total_consumption": {
+                "name": "Całkowite zużycie"
+            }
+        }
+    },
+    "exceptions": {
+        "setpoint_limits_inverted": {
+            "message": "Minimalna nastawa ({min_temp} °C) nie może być wyższa niż maksymalna nastawa ({max_temp} °C)"
+        }
+    }
+}
