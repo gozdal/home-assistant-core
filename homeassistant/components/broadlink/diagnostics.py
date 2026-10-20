@@ -8,7 +8,7 @@ from homeassistant.const import CONF_HOST, CONF_MAC
 from homeassistant.core import HomeAssistant
 from homeassistant.util import dt as dt_util
 
-from .const import BROADLINK_DATA
+from .const import DOMAIN
 
 TO_REDACT = {CONF_HOST, CONF_MAC}
 
@@ -27,7 +27,9 @@ async def async_get_config_entry_diagnostics(
     hass: HomeAssistant, entry: ConfigEntry
 ) -> dict[str, Any]:
     """Return diagnostics for a config entry."""
-    device = hass.data[BROADLINK_DATA].devices[entry.entry_id]
+    # Uses legacy hass.data[DOMAIN] pattern
+    # pylint: disable-next=home-assistant-use-runtime-data
+    device = hass.data[DOMAIN].devices[entry.entry_id]
     assert device.update_manager is not None
     coordinator = device.update_manager.coordinator
     diagnostics: dict[str, Any] = {
