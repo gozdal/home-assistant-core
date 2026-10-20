@@ -5,6 +5,7 @@ from homeassistant.const import Platform
 DOMAIN = "broadlink"
 
 DOMAINS_AND_TYPES = {
+    Platform.BINARY_SENSOR: {"HYS"},
     Platform.CLIMATE: {"HYS"},
     Platform.INFRARED: {"RM4MINI", "RM4PRO", "RM5PLUS", "RMMINI", "RMMINIB", "RMPRO"},
     Platform.LIGHT: {"LB1", "LB2"},
